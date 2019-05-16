@@ -121,7 +121,7 @@ if __name__ == '__main__':
     dict_para = weight_bias_param_init(net)
     sgd_opt = optim.SGD(dict_para,
                         lr=arg_train.init_lr,
-                        dampening=arg_train.momentum,  # todo damp = momentun, otherwise the SGD will output NaN Loss!
+                        # dampening=arg_train.momentum,  # todo damp = momentun, otherwise the SGD will output NaN Loss!
                         momentum=arg_train.momentum,
                         weight_decay=arg_train.weight_decay)
     lr_adjust = optim.lr_scheduler.StepLR(sgd_opt, step_size=1, gamma=arg_train.gamma)
@@ -141,7 +141,7 @@ if __name__ == '__main__':
         x_img = sp['x_img'].to(device)
         score = net(x_img, z_img)
         loss = loss_batch(score)
-        loss_report += float(loss.detach())
+        loss_report += float(loss.item())
         n += 1
         loss.backward()
         sgd_opt.step()

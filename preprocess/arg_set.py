@@ -85,6 +85,7 @@ def log_set():
     logging.info('%17s: %d' % ('Total stride', total_stride))
     logging.info('%17s: %d' % ('Correlation size', corr_size))
     logging.info('==================================================================')
+    return logfile, logger
 
 
-log_set()
+logfile_handler, logger_handler = log_set()

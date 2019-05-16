@@ -12,7 +12,7 @@ gamma = 10 ** -0.06  # final_lr = init_lr * (gamma ^ epoch)
 
 # about sample numbers
 batch_size = 8  # todo
-iter_num = 53200 // batch_size  # todo
+iter_num = 53200 // 4  # // batch_size  # todo
 epoch = 50
 check_interval = 1  # how often to save checkpoint
 num_workers = 16

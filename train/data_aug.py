@@ -7,7 +7,7 @@ import numpy as np
 from functools import partial
 from multiprocessing import Pool
 from torch.utils.data import Dataset
-from torchvision.transforms import Compose, CenterCrop, RandomCrop
+# from torchvision.transforms import Compose, CenterCrop, RandomCrop
 from train import arg_train
 from preprocess import arg_set
 from preprocess.ILSVRC2015.crop_video import total_dataset_info
@@ -46,7 +46,7 @@ def make_label():
         label[pos_region] = 1 / num_pos
         lb_weight[pos_region] = 0.5 / num_pos
     label = np.tile(label, [arg_train.batch_size, 1, 1, 1])
-    lb_weight *= (num_pos + num_neg)  # todo
+    # lb_weight *= (num_pos + num_neg)  # todo
     lb_weight = np.tile(lb_weight, [arg_train.batch_size, 1, 1, 1])
     label = torch.from_numpy(label)
     lb_weight = torch.from_numpy(lb_weight)

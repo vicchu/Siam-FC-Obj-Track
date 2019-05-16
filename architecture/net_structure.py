@@ -58,16 +58,17 @@ class Alex(nn.Module):
                                padding=0,
                                groups=2,
                                bias=True)
-        self.batch5 = nn.BatchNorm2d(num_features=channels_conv[5],
-                                     affine=True,
-                                     track_running_stats=True)
+        # self.batch5 = nn.BatchNorm2d(num_features=channels_conv[5],
+        #                              affine=True,
+        #                              track_running_stats=True)  # todo
 
     def forward(self, x):
         x = self.pool1(F.relu(self.batch1(self.conv1(x))))
         x = self.pool2(F.relu(self.batch2(self.conv2(x))))
         x = F.relu(self.batch3(self.conv3(x)))
         x = F.relu(self.batch4(self.conv4(x)))
-        feature = self.batch5(self.conv5(x))
+        # feature = self.batch5(self.conv5(x))  # todo
+        feature = self.conv5(x)
         return feature
 
 
