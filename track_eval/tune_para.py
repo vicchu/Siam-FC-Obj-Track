@@ -27,23 +27,22 @@ if __name__ == '__main__':
                       analysis=[FitnessStore])
 
 
-    @engine.analysis_register
-    class ConsoleOutput(OnTheFlyAnalysis):
-        master_only = True
-        interval = 1
-
-        def register_step(self, g, population, engine):
-            best_indv = population.best_indv(engine.fitness)
-            scale_step, scale_penalty, scale_lr, hann_weight = best_indv.solution
-            msg = 'Generation: {}, ACC:{:.3f}, step:{:.4f}, penalty:{:.4f}, lr:{:.4f}, hann:{:.4f}' \
-                .format(g, engine.fmax, scale_step, scale_penalty, scale_lr, hann_weight)
-            # engine.logger.info(msg)
-            print(msg)
-
+    # @engine.analysis_register
+    # class ConsoleOutput(OnTheFlyAnalysis):
+    #     master_only = True
+    #     interval = 1
+    #
+    #     def register_step(self, g, population, engine):
+    #         best_indv = population.best_indv(engine.fitness)
+    #         scale_step, scale_penalty, scale_lr, hann_weight = best_indv.solution
+    #         msg = 'Generation: {}, ACC:{:.3f}, step:{:.4f}, penalty:{:.4f}, lr:{:.4f}, hann:{:.4f}' \
+    #             .format(g, engine.fmax, scale_step, scale_penalty, scale_lr, hann_weight)
+    #         # engine.logger.info(msg)
+    #         # print(msg)
 
     @engine.fitness_register
     def fitness(indv):
-        # scale_step, scale_penalty, scale_lr, hann_weight = indv.solution
+        scale_step, scale_penalty, scale_lr, hann_weight = indv.solution
         with tracker_num.get_lock():
             tracker_num.value += 1
             tracker_name = 'SFC_TUNE_' + arg_set.time_str + '_{:02d}'.format(tracker_num.value)
@@ -55,7 +54,11 @@ if __name__ == '__main__':
                             report_dir=arg_test.report_dir)
         exp.run(tracker_tune)
         performance = exp.report([tracker_tune.name])
-        return float(performance[tracker_name]['overall']['success_score'])
+        performance = float(performance[tracker_name]['overall']['success_score'])
+        msg = 'ACC:{:.4f}, step:{:.4f}, penalty:{:.4f}, lr:{:.4f}, hann:{:.4f}' \
+            .format(performance, scale_step, scale_penalty, scale_lr, hann_weight)
+        print(msg)
+        return performance
 
 
     engine.run(ng=100)
