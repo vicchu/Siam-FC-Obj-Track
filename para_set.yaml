@@ -1,0 +1,37 @@
+data_main_path: '/ILSVRC2015'
+data_temp_path: '/sfc_temp/data_temp'
+log_path: '/sfc_temp/log'
+checkpoint_path: '/sfc_temp/check_point/'
+
+# about learning rate
+init_lr: 1.0e-2
+momentum: 0.9
+weight_decay: 5.0e-4
+gamma: 0.8709635899560807  # final_lr = init_lr * (gamma ^ epoch)
+
+# about sample numbers
+batch_size: 8
+iter_num: 13300  # // batch_size  # todo
+epoch: 50
+check_interval: 1  # how often to save checkpoint
+num_workers: 16
+statics_proportion: 0.1
+statics_frame_num: 16
+
+# about augmentation
+rgb_noise: true
+gray_trans: true
+gray_proportion: 0.25
+flip_trans: false  # todo
+flip_proportion: 0.5
+stretch_trans: true
+stretch_max: 4
+stretch_delta: 0.05
+
+# about loss
+rPos: 16
+rNeg: 0
+pair_frame_range: 100
+
+# others
+loss_report_iter: 100  # how often to report loss in cmd

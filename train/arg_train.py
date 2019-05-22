@@ -1,41 +1,47 @@
+import os
+import yaml
 import logging
 from os import path
 from preprocess.arg_set import time_str
 
-checkpoint_path = '/sfc_temp/check_point/'
+yaml_path = os.path.join(os.path.dirname(__file__), '../para_set.yaml')
+with open(yaml_path, 'r') as f:
+    para_train = f.read()
+train_cfg = yaml.load(para_train, yaml.FullLoader)
+checkpoint_path = train_cfg['checkpoint_path']
 
 # about learning rate
-init_lr = 1e-2  # todo
-momentum = 0.9  # todo
-weight_decay = 5e-4
-gamma = 10 ** -0.06  # final_lr = init_lr * (gamma ^ epoch)
+init_lr = train_cfg['init_lr']
+momentum = train_cfg['momentum']
+weight_decay = train_cfg['weight_decay']
+gamma = train_cfg['gamma']  # final_lr = init_lr * (gamma ^ epoch)
 
 # about sample numbers
-batch_size = 8  # todo
-iter_num = 53200 // 4  # // batch_size  # todo
-epoch = 50
-check_interval = 1  # how often to save checkpoint
-num_workers = 16
-statics_proportion = 0.1
-statics_frame_num = 16
+batch_size = train_cfg['batch_size']
+iter_num = train_cfg['iter_num']
+epoch = train_cfg['epoch']
+check_interval = train_cfg['check_interval']  # how often to save checkpoint
+num_workers = train_cfg['num_workers']
+statics_proportion = train_cfg['statics_proportion']
+statics_frame_num = train_cfg['statics_frame_num']
 
 # about augmentation
-rgb_noise = True
-gray_trans = True
-gray_proportion = 0.25
-flip_trans = False  # todo
-flip_proportion = 0.5
-stretch_trans = True
-stretch_max = 4
-stretch_delta = 0.05
+rgb_noise = train_cfg['rgb_noise']
+gray_trans = train_cfg['gray_trans']
+gray_proportion = train_cfg['gray_proportion']
+flip_trans = train_cfg['flip_trans']
+flip_proportion = train_cfg['flip_proportion']
+stretch_trans = train_cfg['stretch_trans']
+stretch_max = train_cfg['stretch_max']
+stretch_delta = train_cfg['stretch_delta']
 
 # about loss
-rPos = 16
-rNeg = 0
-pair_frame_range = 100
+rPos = train_cfg['rPos']
+rNeg = train_cfg['rNeg']
+pair_frame_range = train_cfg['pair_frame_range']
 
 # others
-loss_report_iter = 100  # how often to report loss in cmd
+loss_report_iter = train_cfg['loss_report_iter']  # how often to report loss in cmd
 
 checkpoint_path = path.normpath(checkpoint_path)
 assert isinstance(batch_size, int)

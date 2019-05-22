@@ -6,7 +6,7 @@ import torch
 import numpy as np
 from torch import nn
 from got10k.trackers import Tracker
-from got10k.experiments import ExperimentOTB
+from got10k.experiments import ExperimentOTB, ExperimentGOT10k
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 from track_eval import arg_test
@@ -209,9 +209,15 @@ class SFC(Tracker):
 
 if __name__ == '__main__':
     tracker = SFC(arg_test.name_tracker)
-    exp = ExperimentOTB(arg_test.data_root,
+    exp = ExperimentOTB(os.path.join(arg_test.data_root, 'OTB'),
                         version=2013,
                         result_dir=arg_test.result_dir,
                         report_dir=arg_test.report_dir)
     exp.run(tracker)
     exp.report([tracker.name])
+    exp2 = ExperimentGOT10k(os.path.join(arg_test.data_root, 'got10k'),
+                            subset='val',
+                            result_dir=arg_test.result_dir,
+                            report_dir=arg_test.report_dir)
+    exp2.run(tracker)
+    exp2.report([tracker.name])

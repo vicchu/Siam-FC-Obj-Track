@@ -1,10 +1,15 @@
 import os
 import time
+import yaml
 import logging
 
-data_main_path = '/ILSVRC2015'
-data_temp_path = '/sfc_temp/data_temp'
-log_path = '/sfc_temp/log'
+yaml_path = os.path.join(os.path.dirname(__file__), '../para_set.yaml')
+with open(yaml_path, 'r') as f:
+    para_file = f.read()
+yaml_cfg = yaml.load(para_file, yaml.FullLoader)
+data_main_path = yaml_cfg['data_main_path']
+data_temp_path = yaml_cfg['data_temp_path']
+log_path = yaml_cfg['log_path']
 exemplar_size = 127
 search_size = 255
 total_stride = 8
@@ -66,7 +71,7 @@ def log_set():
     logfile = os.path.join(log_path, time_str + '.log')
     logfile = logging.FileHandler(filename=logfile, mode='w')
     logfile.setFormatter(format_set)
-    logfile.setLevel(logging.DEBUG)
+    logfile.setLevel(logging.INFO)
     logger.addHandler(logfile)
     # Screen output format
     format_set = logging.Formatter(fmt='%(asctime)s: %(message)s', datefmt='%Y/%m/%d %H:%M:%S')
