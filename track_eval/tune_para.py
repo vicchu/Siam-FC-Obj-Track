@@ -1,6 +1,5 @@
 import os
 import sys
-import logging
 from gaft import GAEngine
 from gaft.components import BinaryIndividual, Population
 from gaft.operators import RouletteWheelSelection, UniformCrossover, FlipBitMutation

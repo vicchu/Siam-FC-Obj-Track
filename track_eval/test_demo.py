@@ -17,7 +17,7 @@ def num2(s):
 def plot_show(path_exp: str, start_index: int):
     gt_path = os.path.join(data_root, 'OTB', path_exp, 'groundtruth_rect.txt')
     ipath = os.path.join(data_root, 'OTB', path_exp, 'img/%04d.jpg')
-    showfig_path = os.path.join('/sfc_temp/show', path_exp, '%04d.png')
+    # showfig_path = os.path.join('/sfc_temp/show', path_exp, '%04d.png')
     with open(gt_path, 'r') as f:
         a = f.readlines()
     b = [s.split(',') for s in a]
@@ -25,12 +25,6 @@ def plot_show(path_exp: str, start_index: int):
     n = len(a)
     print(n)
     # exit()
-    # ax = fig.add_subplot(111, aspect='equal')
-    # ax.add_patch(plt.Rectangle(
-    #     (0.1, 0.1),  # (x,y)
-    #     0.5,  # width
-    #     0.5,  # height
-    # ))
     tracker = SFC('SHOW01')
     for k in range(n):
         i = k + 1
@@ -56,7 +50,7 @@ def plot_show(path_exp: str, start_index: int):
         ax.add_patch(plt.Rectangle(box[:2], box[2], box[3], fill=False, edgecolor='g', linewidth=3))
         ax.axis('off')
         fig.show()
-        fig.savefig(showfig_path % k, dpi=300)
+        # fig.savefig(showfig_path % k, dpi=300)
         time.sleep(0.1)
         ax.cla()
         fig.clf()

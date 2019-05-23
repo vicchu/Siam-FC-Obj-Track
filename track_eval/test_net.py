@@ -220,3 +220,9 @@ if __name__ == '__main__':
                             report_dir=arg_test.report_dir)
     exp2.run(tracker)
     exp2.report([tracker.name])
+    exp3 = ExperimentGOT10k(os.path.join(arg_test.data_root, 'got10k'),
+                            subset='test',
+                            result_dir=arg_test.result_dir,
+                            report_dir=arg_test.report_dir)
+    exp3.run(tracker)
+    exp3.report([tracker.name])

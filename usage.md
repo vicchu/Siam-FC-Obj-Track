@@ -211,3 +211,27 @@ Please download the model from [here](https://pan.baidu.com/s/1WYWzvm9jcrbL_s-OI
         ```
     2. Go to `report_dir` you set in [arg_test.yaml](./track_eval/arg_test.yaml), there will be report files which plots the curve for test.\
     前往你在[arg_test.yaml](./track_eval/arg_test.yaml)中设置的`report_dir`路径，里面存有测试报告文件。
+
+## 6. Tune Parameters 调参
+* [Gaft](https://github.com/PytLab/gaft) must be installed to tune parameters. Then set all things well as mentioned in [Set Parameters](#4-set-parameters-%E8%AE%BE%E7%BD%AE%E5%8F%82%E6%95%B0).\
+  调参必须安装好[Gaft](https://github.com/PytLab/gaft)。然后按照[设置参数](#4-set-parameters-%E8%AE%BE%E7%BD%AE%E5%8F%82%E6%95%B0)的说明设置好。
+* Execute the command:\
+  执行命令：
+  ```bash
+  cd ${YOUR_WORK_DIR}
+  python ./track_eval/tune_para.py
+  ```
+    >It takes very much time (maybe half a year?) so I haven't finished it yet. Good luck.\
+    因为它非常耗时（大概半年？）所以目前我从未运行完它。祝你好运。
+
+## 7. Demo 示例
+* Set all things well as mentioned in [Set Parameters](#4-set-parameters-%E8%AE%BE%E7%BD%AE%E5%8F%82%E6%95%B0).\
+  按照[设置参数](#4-set-parameters-%E8%AE%BE%E7%BD%AE%E5%8F%82%E6%95%B0)的说明设置好。
+* Execute the command:\
+  执行命令：
+  ```bash
+  cd ${YOUR_WORK_DIR}
+  python ./track_eval/test_demo.py
+  ```
+  You will see several examples in which the object is tracked successfully or unsuccessfully. You can DIY the code.\
+  你会看到几个跟踪成功或失败的例子。你可以自己修改代码。
