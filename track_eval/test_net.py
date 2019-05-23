@@ -2,7 +2,6 @@ import os
 import cv2
 import sys
 import torch
-# import logging
 import numpy as np
 from torch import nn
 from got10k.trackers import Tracker

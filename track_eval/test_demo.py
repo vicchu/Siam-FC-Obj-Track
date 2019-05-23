@@ -14,10 +14,10 @@ def num2(s):
     return r
 
 
-if __name__ == '__main__':
-    gt_path = os.path.join(data_root, 'OTB/Tiger2/groundtruth_rect.txt')
-    ipath = os.path.join(data_root, 'OTB/Tiger2/img/%04d.jpg')
-    # showfig_path = '/sfc_temp/show/Tiger2/%04d.pdf'
+def plot_show(path_exp: str, start_index: int):
+    gt_path = os.path.join(data_root, 'OTB', path_exp, 'groundtruth_rect.txt')
+    ipath = os.path.join(data_root, 'OTB', path_exp, 'img/%04d.jpg')
+    showfig_path = os.path.join('/sfc_temp/show', path_exp, '%04d.png')
     with open(gt_path, 'r') as f:
         a = f.readlines()
     b = [s.split(',') for s in a]
@@ -45,8 +45,8 @@ if __name__ == '__main__':
             box[0] -= 1
             box[1] -= 1
         print(k)
-        # if k < 200:
-        #     continue
+        if k < start_index:
+            continue
         fig = plt.figure(figsize=(im.size[0] / 72, im.size[1] / 72), dpi=72)
         ax = fig.add_subplot(111, aspect='equal')
         ax.xaxis.set_major_locator(plt.NullLocator())
@@ -56,10 +56,17 @@ if __name__ == '__main__':
         ax.add_patch(plt.Rectangle(box[:2], box[2], box[3], fill=False, edgecolor='g', linewidth=3))
         ax.axis('off')
         fig.show()
-        # fig.savefig(showfig_path % k, dpi=300)
+        fig.savefig(showfig_path % k, dpi=300)
         time.sleep(0.1)
         ax.cla()
         fig.clf()
-        # if k > 210:
-        #     break
-    # print(c)
+        if k > (start_index + 10):
+            break
+
+
+if __name__ == '__main__':
+    plot_show('Boy', 500)
+    plot_show('Car1', 500)
+    plot_show('Human6', 400)
+    plot_show('Panda', 200)
+    plot_show('Tiger2', 200)
