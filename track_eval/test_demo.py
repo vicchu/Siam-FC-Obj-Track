@@ -24,7 +24,6 @@ def plot_show(path_exp: str, start_index: int):
     c = [num2(s) for s in b]
     n = len(a)
     print(n)
-    # exit()
     tracker = SFC('SHOW01')
     for k in range(n):
         i = k + 1
