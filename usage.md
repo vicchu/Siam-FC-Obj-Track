@@ -209,5 +209,5 @@ Please download the model from [here](https://pan.baidu.com/s/1WYWzvm9jcrbL_s-OI
         cd ${YOUR_WORK_DIR}
         python ./track_eval/test_net.py
         ```
-    2. Go to `report_dir` you set in [arg_test.yaml](track_eval\arg_test.yaml), there will be report files which plots the curve for test.\
-    前往你在[arg_test.yaml](track_eval\arg_test.yaml)中设置的`report_dir`路径，里面存有测试报告文件。
+    2. Go to `report_dir` you set in [arg_test.yaml](./track_eval/arg_test.yaml), there will be report files which plots the curve for test.\
+    前往你在[arg_test.yaml](./track_eval/arg_test.yaml)中设置的`report_dir`路径，里面存有测试报告文件。
